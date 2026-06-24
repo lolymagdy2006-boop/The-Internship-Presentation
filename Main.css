@@ -1,14 +1,16 @@
-/* --- Global Styles & Typography --- */
+/* ==========================================================================
+   1. GLOBAL STYLES & VARIABLE ARCHITECTURE
+   ========================================================================== */
 :root {
-    --bg-dark: #ffffff;       /* Main white background */
-    --bg-alt: #f4f6fa;        /* Light subtle gray/blue for alternating sections */
-    --bg-card: #ffffff;       /* Crisp white for cards and panels */
-    --accent-blue-deep: #0d1f9e; /* Deep navy for primary headings */
-    --accent-blue-mid: #2a3088;  /* Corporate navy for subheadings and elements */
-    --accent-green: #8dc63f;   /* Vibrant lime green accent */
-    --text-primary: #0d1f9e;   /* Dark navy for high-contrast text */
-    --text-secondary: #4b5563; /* Muted slate gray for readable body text */
-    --border-color: #e2e8f0;   /* Light clean borders */
+    --bg-dark: #ffffff;           /* Main crisp white canvas background */
+    --bg-alt: #f4f6fa;            /* Light blue/gray tint for layout section alternation */
+    --bg-card: #ffffff;           /* Pure white card panel backgrounds */
+    --accent-blue-deep: #0d1f9e;     /* Primary bold brand navy for titles */
+    --accent-blue-mid: #2a3088;      /* Secondary structural navy for sub-elements */
+    --accent-green: #8dc63f;       /* Vibrant lime signature accent */
+    --text-primary: #0d1f9e;       /* High-contrast brand navy for dominant text */
+    --text-secondary: #4b5563;     /* Readable slate gray body typography */
+    --border-color: #e2e8f0;       /* Fine structural containment line accents */
     --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -34,7 +36,9 @@ body {
     padding: 0 15px;
 }
 
-/* --- Navigation Bar --- */
+/* ==========================================================================
+   2. NAVIGATION BAR SYSTEM
+   ========================================================================== */
 .navbar {
     background-color: rgba(255, 255, 255, 0.95);
     border-bottom: 1px solid var(--border-color);
@@ -47,29 +51,42 @@ body {
 }
 
 .nav-container {
-    display: flex;
-    justify-content: space-between;
+    display: flex !important; 
+    justify-content: space-between !important; 
     align-items: center;
+    width: 100%;                  
     max-width: 1200px;
     margin: 0 auto;
     padding: 15px 20px;
 }
 
 .logo {
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: var(--accent-blue-deep);
+    display: flex;
+    align-items: center;
 }
 
-.logo .highlight {
-    color: var(--accent-green);
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navbar-logo-img {
+    height: 70px;      
+    width: auto;       
+    display: block;
+    transition: transform 0.2s ease-in-out;
+}
+
+.navbar-logo-img:hover {
+    transform: scale(1.03); 
 }
 
 .nav-links {
-    display: flex;
+    display: flex !important;
     list-style: none;
     gap: 25px;
+    margin-left: auto !important; 
 }
 
 .nav-links a {
@@ -77,6 +94,7 @@ body {
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
+    white-space: nowrap; 
     transition: color 0.3s ease;
 }
 
@@ -85,7 +103,9 @@ body {
     color: var(--accent-blue-deep);
 }
 
-/* --- Hero Section --- */
+/* ==========================================================================
+   3. HERO HEADER SECTION
+   ========================================================================== */
 .hero-section {
     padding: 160px 0 100px 0;
     text-align: center;
@@ -117,13 +137,16 @@ body {
 }
 
 .hero-section p {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     color: var(--text-secondary);
-    max-width: 750px;
+    max-width: 850px; 
     margin: 0 auto;
+    line-height: 1.7;
 }
 
-/* --- Generic Section Settings --- */
+/* ==========================================================================
+   4. LAYOUT BLOCKS & ACCORDION SYSTEM
+   ========================================================================== */
 .section {
     padding: 90px 0;
 }
@@ -153,7 +176,6 @@ body {
     border-radius: 2px;
 }
 
-/* --- Cards Grid Layout --- */
 .grid {
     display: grid;
     gap: 25px;
@@ -190,10 +212,79 @@ body {
     color: var(--accent-blue-deep);
 }
 
-/* --- Case Study Project Blocks --- */
+/* Clickable Accordion Elements */
+.responsibilities-accordion {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.accordion-item {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-item summary {
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-blue-deep);
+    cursor: pointer;
+    list-style: none; 
+    display: flex;
+    align-items: center;
+    position: relative;
+    user-select: none;
+}
+
+.accordion-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 20px;
+    font-size: 1.3rem;
+    color: var(--accent-green);
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.accordion-item[open] summary::after {
+    content: '−';
+}
+
+.accordion-item summary:hover {
+    background-color: var(--bg-alt);
+}
+
+.accordion-item p {
+    padding: 0 20px 20px 52px; 
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    border-top: 1px solid transparent;
+}
+
+.accordion-item[open] {
+    border-color: var(--accent-green);
+    box-shadow: 0 4px 12px rgba(13, 31, 158, 0.03);
+}
+
+.icon-space {
+    width: 32px;
+    color: var(--accent-blue-mid);
+    font-size: 1.15rem;
+}
+
+/* ==========================================================================
+   5. COMPREHENSIVE CASE STUDY PROJECT LAYOUT FRAMEWORK
+   ========================================================================== */
 .project-block {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Exact uniform grid footprint: Text Left, Media Right */
     gap: 50px;
     align-items: center;
     margin-bottom: 70px;
@@ -201,13 +292,6 @@ body {
 
 .project-block:last-child {
     margin-bottom: 0;
-}
-
-.project-block.inverted .project-content {
-    order: 2;
-}
-.project-block.inverted .project-visual {
-    order: 1;
 }
 
 .project-tag {
@@ -222,6 +306,27 @@ body {
     font-size: 1.8rem;
     margin: 5px 0 15px 0;
     color: var(--accent-blue-deep);
+}
+
+/* Project Task Lists */
+.tasks-list {
+    list-style: none;
+    margin: 10px 0 20px 0;
+}
+
+.tasks-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+}
+
+.tasks-list li::before {
+    content: "•";
+    color: var(--accent-green);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
 }
 
 .skills-tags {
@@ -241,31 +346,76 @@ body {
     font-weight: 500;
 }
 
-.screenshot-placeholder {
-    background-color: rgba(255, 255, 255, 0.7);
-    border: 2px dashed #cbd5e1;
+/* --- Project Media Architecture --- */
+.project-visual {
+    width: 100%;
+}
+
+.project-images-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Firm side-by-side split layout for Projects 1 & 3 */
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+}
+
+/* --- Isolated Vertical Video Rendering Container (Project 1) --- */
+.video-placeholder {
+    width: 100%;
+    height: 340px; 
+    background-color: #0b0d1b; /* Matte dark layout frame preventing 9:16 aspect gaps */
     border-radius: 12px;
-    height: 280px;
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--text-secondary);
-    text-align: center;
-    padding: 20px;
 }
 
-.alt-bg .screenshot-placeholder {
-    background-color: var(--bg-dark); /* Flips background color inside alt-sections */
+.video-placeholder video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Full scale frame visibility without top/bottom cropping */
 }
 
-.screenshot-placeholder i {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    color: #94a3b8;
+/* --- Standard Photo Containers & Interactive Scrolling Animations --- */
+.screenshot-placeholder {
+    width: 100%;
+    height: 340px; /* Aligned precisely with video container parameters */
+    overflow: hidden; 
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
 }
 
-/* --- Skills Layout Lists --- */
+.screenshot-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top; 
+    filter: brightness(0.96);
+    transition: object-position 0.8s ease-in-out, filter 0.3s ease; 
+}
+
+/* Mouse Hover Action: Elegant slow-pan downwards through high-resolution file */
+.screenshot-placeholder:hover img {
+    object-position: bottom; 
+    filter: brightness(1.03);
+}
+
+/* --- Project 2 Custom Layout Extension: Vertical Stacked Landscape --- */
+.project-images-column-landscape {
+    grid-template-columns: 1fr !important; /* Converts side-by-side splits into a clean vertical row column */
+    gap: 20px !important; 
+}
+
+.project-images-column-landscape .screenshot-placeholder {
+    height: 190px !important; /* Calibrated short landscape profile to offset layout height gaps */
+    width: 100%;
+}
+
+/* ==========================================================================
+   6. SKILLS, TIMELINES, & EVALUATION MODULES
+   ========================================================================== */
 .skills-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -278,6 +428,13 @@ body {
     border-radius: 12px;
     padding: 40px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.01);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skills-column:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-green);
+    box-shadow: 0 12px 20px rgba(13, 31, 158, 0.06);
 }
 
 .skills-column h3 {
@@ -312,7 +469,7 @@ body {
     font-weight: bold;
 }
 
-/* --- Challenges Timeline Analysis --- */
+/* Challenges Timeline Mechanics */
 .timeline {
     max-width: 800px;
     margin: 0 auto;
@@ -345,7 +502,7 @@ body {
     top: 0;
     width: 30px;
     height: 30px;
-    background-color: #ef4444; /* Alert Red for a challenge block */
+    background-color: #ef4444; 
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -355,7 +512,7 @@ body {
 }
 
 .timeline-icon.success {
-    background-color: var(--accent-green); /* Solution indicator green */
+    background-color: var(--accent-green); 
     color: #ffffff;
 }
 
@@ -373,7 +530,13 @@ body {
     color: var(--accent-blue-deep);
 }
 
-/* --- Self Assessment / Future Plans Dual Layout --- */
+.clickable-challenge:hover .timeline-panel {
+    border-color: var(--accent-green);
+    background-color: rgba(0, 0, 0, 0.02);
+    transition: all 0.2s ease;
+}
+
+/* Dual Panel Strategic Evaluations */
 .dual-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -399,7 +562,20 @@ body {
     background: linear-gradient(135deg, var(--bg-card) 0%, rgba(141, 198, 63, 0.04) 100%);
 }
 
-/* --- Footer --- */
+/* Evaluation Cards Hover Interaction */
+.evaluation-card {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.evaluation-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-green);
+    box-shadow: 0 12px 20px rgba(13, 31, 158, 0.06);
+}
+
+/* ==========================================================================
+   7. FOOTER WRAPPER
+   ========================================================================== */
 .footer-section {
     padding: 80px 0;
     text-align: center;
@@ -429,17 +605,34 @@ body {
     letter-spacing: 1px;
 }
 
-/* --- Responsive Adjustments --- */
+/* Canva Redirect Button Callout */
+.canva-btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: #2e3286; /* Classic Canva Teal Branding Tone */
+    color: #ffffff !important;
+    padding: 12px 28px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none !important;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 196, 204, 0.3);
+    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.canva-btn:hover {
+    background-color: #00a9b0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 196, 204, 0.45);
+}
+
+/* ==========================================================================
+   8. RESPONSIVE MEDIA QUERIES (FLUID LAYOUT CONTROL)
+   ========================================================================== */
 @media (max-width: 900px) {
-    .project-block, .project-block.inverted {
-        grid-template-columns: 1fr;
+    .project-block {
+        grid-template-columns: 1fr; /* Collapses text and content grids cleanly into singular display blocks */
         gap: 30px;
-    }
-    .project-block.inverted .project-content {
-        order: 1;
-    }
-    .project-block.inverted .project-visual {
-        order: 2;
     }
     .skills-container, .dual-layout {
         grid-template-columns: 1fr;
@@ -451,6 +644,12 @@ body {
 
 @media (max-width: 600px) {
     .nav-links {
-        display: none;
+        display: none; /* Safely optimizes layout viewports on smartphone displays */
+    }
+    .project-images-pair {
+        grid-template-columns: 1fr; /* Drops double horizontal slots into vertical single stacks */
+    }
+    .project-images-column-landscape .screenshot-placeholder {
+        height: 160px !important; /* Scales landscape aspect profiles uniformly down on tiny mobile views */
     }
 }
