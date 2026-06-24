@@ -7,15 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         let currentSectionId = '';
         
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            
-            // Checks if current scroll window matches the section parameters
-            if (window.scrollY >= (sectionTop - 160)) {
-                currentSectionId = section.getAttribute('id');
-            }
-        });
+        // Fix edge-case: handling the absolute top scroll position perfectly
+        if (window.scrollY === 0) {
+            currentSectionId = 'hero';
+        } else {
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                // Checks if current scroll window matches the section parameters
+                if (window.scrollY >= (sectionTop - 160)) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+        }
 
         navLinks.forEach(link => {
             link.classList.remove('active');
@@ -34,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (targetElement) {
                     e.preventDefault();
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop - 80, // Accurate spacing for sticky menu bar alignment
                         behavior: 'smooth'
                     });
                 }
